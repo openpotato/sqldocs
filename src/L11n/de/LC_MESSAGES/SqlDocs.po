@@ -1,0 +1,106 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: SqlDocs\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: \n"
+"Language-Team: STÜBER SYSTEMS GmbH\n"
+"Language: de\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: GetString;GetPluralString:1,2;GetParticularString:1c,2;GetParticularPluralString:1c,2,3\n"
+"X-Generator: Poedit 3.3.1\n"
+
+msgid "Introduction"
+msgstr "Einführung"
+
+msgid "Database"
+msgstr "Datenbank"
+
+msgid "Schema"
+msgstr "Schema"
+
+msgid "Tables"
+msgstr "Tabellen"
+
+msgid "Views"
+msgstr "Ansichten"
+
+msgid "Description"
+msgstr "Beschreibung"
+
+msgid "Value"
+msgstr "Wert"
+
+msgid "Schema {0}"
+msgstr "Schema {0}"
+
+msgid "This schema contains one table."
+msgid_plural "This schema contains {0} tables."
+msgstr[0] "Dieses Schema enthält eine Tabelle."
+msgstr[1] "Dieses Schema enthält {0} Tabellen."
+
+msgid "This schema contains one view."
+msgid_plural "This schema contains {0} views."
+msgstr[0] "Dieses Schema enthält eine Ansicht."
+msgstr[1] "Dieses Schema enthält {0} Ansichten."
+
+msgid "Table {0}"
+msgstr "Tabelle {0}"
+
+msgid "View {0}"
+msgstr "Ansicht {0}"
+
+msgid "This table belongs to schema {0}."
+msgstr "Diese Tabelle gehört zum Schema {0}."
+
+msgid "This view belongs to schema {0}."
+msgstr "Diese Ansicht gehört zum Schema {0}."
+
+msgid "Query"
+msgstr "Abfrage"
+
+msgid "SQL"
+msgstr "SQL"
+
+msgid "Columns"
+msgstr "Spalten"
+
+msgid "This table contains one column."
+msgid_plural "This table contains {0} columns."
+msgstr[0] "Diese Tabelle hat eine Spalte."
+msgstr[1] "Diese Tabelle hat {0} Spalten."
+
+msgid "This view contains one column."
+msgid_plural "This view contains {0} columns."
+msgstr[0] "Diese Ansicht hat eine Spalte."
+msgstr[1] "Diese Ansicht hat {0} Spalten."
+
+msgid "Primary key"
+msgstr "Primärschlüssel"
+
+msgid "This table has a primary key."
+msgstr "Diese Tabelle hat einen Primärschlüssel."
+
+msgid "Indices"
+msgstr "Indizes"
+
+msgid "This table has one index."
+msgid_plural "This table has {0} indices."
+msgstr[0] "Diese Tabelle hat einen Index."
+msgstr[1] "Diese Tabelle hat {0} Indizes."
+
+msgid "This view has one index."
+msgid_plural "This view has {0} indices."
+msgstr[0] "Diese Ansicht hat einen Index."
+msgstr[1] "Diese Ansicht hat {0} Indizes."
+
+msgid "Foreign keys"
+msgstr "Fremdschlüssel"
+
+msgid "This table has one foreign key."
+msgid_plural "This table has {0} foreign keys."
+msgstr[0] "Diese Tabelle hat einen Fremdschlüssel."
+msgstr[1] "Diese Tabelle hat {0} Fremdschlüssel."

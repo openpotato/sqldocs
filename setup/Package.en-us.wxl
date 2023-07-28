@@ -1,0 +1,20 @@
+﻿<!--
+This file contains the declaration of all the localizable strings.
+-->
+<WixLocalization xmlns="http://wixtoolset.org/schemas/v4/wxl" Culture="en-US">
+
+  <String Id="AppName" Value="SQLDocs" />
+  <String Id="AppDescription" Value="Building nice looking documention of relational database schemata" />
+  <String Id="AppFolder" Value="SqlDocs" />
+  <String Id="Manufacturer" Value="STÜBER SYSTEMS GmbH" />
+  <String Id="ProjectFolder" Value="OpenPotato" />
+  <String Id="DowngradeError" Value="A newer version of [ProductName] is already installed." />
+
+  <String Id="FeaturesCompleteTitle" Value="Complete installation" />
+  <String Id="FeaturesCompleteDescription" Value="Complete installation of all available features." />
+  <String Id="FeatureCoreTitle" Value="Core components" />
+  <String Id="FeatureCoreDescription" Value="Installation of the core components." />
+
+  <String Id="WelcomeDlgDescription" Value="The Setup Wizard will install [ProductName] version [ProductVersion] on your computer. Click Next to continue or Cancel to exit the Setup Wizard." />
+
+</WixLocalization>

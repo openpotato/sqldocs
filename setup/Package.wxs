@@ -1,0 +1,158 @@
+﻿<Wix 
+  xmlns="http://wixtoolset.org/schemas/v4/wxs" 
+  xmlns:netfx="http://wixtoolset.org/schemas/v4/wxs/netfx"
+  xmlns:ui="http://wixtoolset.org/schemas/v4/wxs/ui">
+
+  <!-- Version number from EXE file -->
+  <?define Version="!(bind.FileVersion.SqlDocs.exe)" ?>
+
+  <!-- The upgrade code GUID for the product (DO NOT CHANGE!) -->
+  <?define UpgradeCode="f31cb855-9852-4e73-adbf-4d961906b8be" ?>
+
+  <!-- The URL for add/remove programs -->
+  <?define AppHelpLink="https://github.com/openpotato" ?>
+
+  <!-- 32-bit / 64-bit dependend variables -->
+  <?if $(var.Platform) = x64 ?>
+    <?define SourceFolder = "..\src\bin\Publish\win-x64" ?>
+  <?else?>
+    <?define SourceFolder = "..\src\bin\Publish\win-x86" ?>
+  <?endif?>
+
+  <!-- Package definition -->
+  <Package
+      Name="!(loc.AppName)"
+      Language="1033"
+      Manufacturer="!(loc.Manufacturer)"
+      Version="$(var.Version)"
+      Scope="perMachine"
+      UpgradeCode="$(var.UpgradeCode)"
+      Compressed="true">
+
+    <!-- Summary Information Stream -->
+    <SummaryInformation 
+      Description="!(loc.AppDescription)" />
+
+    <!-- App icon -->
+    <Icon Id="AppIcon.exe" SourceFile="images\app.ico" />
+
+    <!-- Properties for add/remove programs -->
+    <Property Id="ARPPRODUCTICON" Value="AppIcon.exe" />
+    <Property Id="ARPHELPLINK" Value="$(var.AppHelpLink)" />
+    <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
+    
+    <!-- Default installation folder -->
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
+
+    <!-- Disable path validation -->
+    <Property Id="WIXUI_DONTVALIDATEPATH" Value="1" />
+    
+    <!-- Upgrade logic -->
+    <MajorUpgrade DowngradeErrorMessage="!(loc.DowngradeError)" />
+
+    <!-- Determine the directory of a previous installation (if one exists). If not INSTALLDIR stays empty -->
+    <Property Id="INSTALLDIR">
+      <RegistrySearch Id="DetermineInstallLocation" Type="raw" Root="HKLM" Key="Software\!(loc.Manufacturer)\!(loc.AppName)" Name="InstallLocation" />
+    </Property>
+
+    <!-- Set ARPINSTALLLOCATION property (see https://learn.microsoft.com/en-us/windows/win32/msi/arpinstalllocation) -->
+    <CustomAction Id="SetARPINSTALLLOCATION" Property="ARPINSTALLLOCATION" Value="[INSTALLDIR]" />
+
+    <!-- This is the main installer sequence run when the product is actually installed -->
+    <InstallExecuteSequence>
+
+      <!-- Determine the install location after the install path has been validated by the installer -->
+      <Custom Action="SetARPINSTALLLOCATION" After="InstallValidate"></Custom>
+
+    </InstallExecuteSequence>
+
+    <!-- Compatibility check for .NET 7 -->
+    <netfx:DotNetCompatibilityCheck
+      Property="DOTNETRUNTIMECHECK"
+      Platform="$(var.Platform)"
+      RollForward="major"
+      RuntimeType="core"
+      Version="7.0.0"/>
+
+    <!-- Embed cab files into msi -->
+    <MediaTemplate EmbedCab="yes"/>
+    
+    <!-- Feature structure -->
+    <Feature Id="Complete" Title="!(loc.FeaturesCompleteTitle)" Description="!(loc.FeaturesCompleteDescription)" Display="expand" Level="1" ConfigurableDirectory="INSTALLDIR">
+
+      <Feature Id="Core" Title="!(loc.FeatureCoreTitle)" Description="!(loc.FeatureCoreDescription)" Level="1">
+
+        <ComponentRef Id="SqlDocs.exe" />
+        <ComponentRef Id="TranslationFile.de" />
+        <ComponentRef Id="Registry.InstallLocation" />
+        <ComponentRef Id="Environment.InstallLocation" />
+
+      </Feature>
+
+    </Feature>
+
+    <!-- Directory and file structure -->
+    <StandardDirectory Id="ProgramFiles6432Folder">
+      <Directory Id="ProjectFolder" Name="!(loc.ProjectFolder)">
+        <Directory Id="INSTALLDIR" Name="!(loc.AppFolder)">
+
+          <!-- EXE file -->
+          <Component Id="SqlDocs.exe" Guid="f33cd9b6-dd05-4e99-bb65-550b90722459">
+            <File
+              Id="SqlDocs.exe"
+              Source="$(var.SourceFolder)\SqlDocs.exe"
+              KeyPath="yes" />
+          </Component>
+
+          <!-- Languages files -->
+          <Directory Id="L11nFolder" Name="L11n">
+            <Directory Id="L11nFolder.de" Name="de">
+              <Directory Id="L11nFolder.LC_MESSAGES.de" Name="LC_MESSAGES">
+
+                <!-- German language files -->
+                <Component Id="TranslationFile.de" Guid="097baced-9335-4933-9703-414bbfdddefc">
+                  <File
+                    Id="SqlDocs.mo.de"
+                    Source="$(var.SourceFolder)\L11n\de\LC_MESSAGES\SqlDocs.mo" 
+                    KeyPath="yes" />
+                </Component>
+
+              </Directory>
+            </Directory>
+          </Directory>
+
+          <!-- Registry entries -->
+          <Component Id="Registry.InstallLocation" Guid="424374e7-3d05-4289-b1bb-67c92fc3c20f">
+            <RegistryKey Root="HKLM" Key="Software\!(loc.Manufacturer)\!(loc.AppName)">
+              <RegistryValue
+                Name="InstallLocation"
+                Value="[INSTALLDIR]"
+                Type="string"
+                KeyPath="yes" />
+            </RegistryKey>
+          </Component>
+
+          <!-- Environment variable -->
+          <Component Id="Environment.InstallLocation" Guid="d542b1c9-553b-4d83-9919-05de075b573c">
+            <Environment
+              Id="PATH"
+              Name="PATH"
+              Value="[INSTALLDIR]"
+              Permanent="yes"
+              Part="last"
+              Action="set"
+              System="yes" />
+          </Component>
+
+        </Directory>
+      </Directory>
+    </StandardDirectory>
+
+    <!-- Our installer UI -->
+    <UI>
+      <UIRef Id="CustomWixUI_InstallDir" />
+    </UI> 
+
+  </Package>
+  
+</Wix>
