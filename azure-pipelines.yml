@@ -60,7 +60,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: 'src/SqlDocs.App.csproj'
-    arguments: '-c $(BuildConfiguration) -a x64 -o src/bin/Publish/win-x64 /p:Version=$(SemVersion)'
+    arguments: '/p:PublishProfile=x64 /p:Version=$(SemVersion)'
     zipAfterPublish: false
     modifyOutputPath: false
 - task: DotNetCoreCLI@2
@@ -69,7 +69,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: 'src/SqlDocs.App.csproj'
-    arguments: '-c $(BuildConfiguration) -a x86 -o src/bin/Publish/win-x86 /p:Version=$(SemVersion)'
+    arguments: '/p:PublishProfile=x86 /p:Version=$(SemVersion)'
     zipAfterPublish: false
     modifyOutputPath: false
 - task: DotNetCoreCLI@2
@@ -78,7 +78,7 @@ steps:
     command: 'publish'
     publishWebProjects: false
     projects: 'src/SqlDocs.App.csproj'
-    arguments: '-c $(BuildConfiguration) -a x86 -o src/bin/Publish/portable /p:Version=$(SemVersion)'
+    arguments: '/p:PublishProfile=Portable /p:Version=$(SemVersion)'
     zipAfterPublish: false
     modifyOutputPath: false
 - task: PowerShell@2

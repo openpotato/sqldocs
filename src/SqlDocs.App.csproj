@@ -13,13 +13,13 @@
     <Description>Building nice looking documention of relational database schemata</Description>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+  <PropertyGroup Condition="'$(Configuration)|$(RuntimeIdentifier)'=='Release|win-x86'">
     <PublishSingleFile>true</PublishSingleFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x86'">
+  <PropertyGroup Condition="'$(Configuration)|$(RuntimeIdentifier)'=='Release|win-x64'">
     <PublishSingleFile>true</PublishSingleFile>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|ARM64'">
+  <PropertyGroup Condition="'$(Configuration)|$(RuntimeIdentifier)'=='Release|win-arm64'">
     <PublishSingleFile>true</PublishSingleFile>
   </PropertyGroup>
 
