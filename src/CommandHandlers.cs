@@ -49,7 +49,7 @@ namespace SqlDocs
 
                     progressReport.Finish();
 
-                    if (dbSchemaFile.Exists) 
+                    if (dbSchemaFile.Exists)
                     {
                         progressReport.Start("Merge and update database schema file");
 
@@ -83,7 +83,7 @@ namespace SqlDocs
             await Execute(async (cancellationToken, cancellationEvent) =>
             {
                 var progressReport = ProgressReportFactory.CreateProgressReport(ProgressUnit.Count);
-                var catalog = new Catalog("SqlDocs", "./L11n", new CultureInfo(language));
+                var catalog = new Catalog("SqlDocs", Path.Combine(GetAppFolder(), "./L11n"), new CultureInfo(language));
                 try
                 {
                     progressReport.Start("Generate database schema");
@@ -137,7 +137,7 @@ namespace SqlDocs
             await Execute(async (cancellationToken, cancellationEvent) =>
             {
                 var progressReport = ProgressReportFactory.CreateProgressReport(ProgressUnit.Count);
-                var catalog = new Catalog("SqlDocs", "./L11n", new CultureInfo(language));
+                var catalog = new Catalog("SqlDocs", Path.Combine(GetAppFolder(), "./L11n"), new CultureInfo(language));
                 try
                 {
                     progressReport.Start("Load database schema file");
@@ -199,6 +199,15 @@ namespace SqlDocs
 
             Console.WriteLine();
             Console.WriteLine($"Time elapsed: {stopwatch.Elapsed}.");
+        }
+
+        private static string GetAppFolder()
+        {
+            // Get the full location of the assembly
+            string assemblyLocation = Environment.ProcessPath;
+
+            // Get the folder that's in
+            return Path.GetDirectoryName(assemblyLocation);
         }
     }
 }

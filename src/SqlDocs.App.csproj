@@ -13,16 +13,6 @@
     <Description>Building nice looking documention of relational database schemata</Description>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(RuntimeIdentifier)'=='Release|win-x86'">
-    <PublishSingleFile>true</PublishSingleFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(RuntimeIdentifier)'=='Release|win-x64'">
-    <PublishSingleFile>true</PublishSingleFile>
-  </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)|$(RuntimeIdentifier)'=='Release|win-arm64'">
-    <PublishSingleFile>true</PublishSingleFile>
-  </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="Enbrea.MdBuilder" Version="0.0.2" />
     <PackageReference Include="Enbrea.Progress" Version="0.0.4" />
