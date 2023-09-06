@@ -124,8 +124,8 @@ steps:
       $env:SM_HOST = '$(SM_HOST)'
       $env:SM_CLIENT_CERT_FILE = '$(SM_CLIENT_CERT_FILE.secureFilePath)'
       $env:SM_LOG_OUTPUT = 'console'
-      signtool.exe sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /sha1 $(SM_CERT_FINGERPRINT) $(Build.ArtifactStagingDirectory)/sqldocs-x64.msi
-      signtool.exe sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /sha1 $(SM_CERT_FINGERPRINT) $(Build.ArtifactStagingDirectory)/sqldocs-x86.msi
+      signtool.exe sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /sha1 $(SM_CERT_FINGERPRINT) /d "SQLDocs" $(Build.ArtifactStagingDirectory)/sqldocs-x64.msi
+      signtool.exe sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /sha1 $(SM_CERT_FINGERPRINT) /d "SQLDocs" $(Build.ArtifactStagingDirectory)/sqldocs-x86.msi
     failOnStderr: true
     pwsh: true
 - task: PowerShell@2
