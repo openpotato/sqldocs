@@ -39,7 +39,6 @@
     <!-- Properties for add/remove programs -->
     <Property Id="ARPPRODUCTICON" Value="AppIcon.exe" />
     <Property Id="ARPHELPLINK" Value="$(var.AppHelpLink)" />
-    <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
     
     <!-- Default installation folder -->
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
