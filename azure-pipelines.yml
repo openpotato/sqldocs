@@ -2,21 +2,22 @@ pool:
   vmImage: 'windows-2022'
 
 variables:
+- group: 'code-sign-config'
 - group: 'dotnet-config'
 - group: 'github-config'
 
 steps:
 - checkout: self
   persistCredentials: true
-- task: SSMClientToolsSetup@1
-  displayName: 'Setup DigiCert Tools'
-  inputs:
-    APIKey: '$(SM_API_KEY)'
 - task: DownloadSecureFile@1
   displayName: 'Download Client Authentication Certificate'
   name: SM_CLIENT_CERT_FILE
   inputs:
     secureFile: ClientCert.p12
+- task: SSMClientToolsSetup@1
+  displayName: 'Setup DigiCert Tools'
+  inputs:
+    APIKey: '$(SM_API_KEY)'
 - task: PowerShell@2
   displayName: 'Prepare Code Signing'
   inputs:
