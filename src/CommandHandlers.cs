@@ -19,7 +19,7 @@
  */
 #endregion
 
-using Enbrea.Progress;
+using Enbrea.Konsoli;
 using NGettext;
 using SqlDocs.DatabaseProvider;
 using SqlDocs.DataModel;
@@ -39,40 +39,40 @@ namespace SqlDocs
         {
             await Execute(async (cancellationToken, cancellationEvent) =>
             {
-                var progressReport = ProgressReportFactory.CreateProgressReport(ProgressUnit.Count);
+                var consoleWriter = ConsoleWriterFactory.CreateConsoleWriter(ProgressUnit.Count);
                 try
                 {
-                    progressReport.Start("Generate database schema");
+                    consoleWriter.StartProgress("Generate database schema");
 
                     var provider = DatabaseProviderFactory.CreateDatabaseProvider(dbEngine, dbConnection);
                     var dbSchema = await DbSchemaFactory.CreateDbSchemaAsync(provider, cancellationToken);
 
-                    progressReport.Finish();
+                    consoleWriter.FinishProgress();
 
                     if (dbSchemaFile.Exists)
                     {
-                        progressReport.Start("Merge and update database schema file");
+                        consoleWriter.StartProgress("Merge and update database schema file");
 
                         dbSchema = await DbSchemaFactory.LoadAndMergeDbSchemaAsync(dbSchemaFile, dbSchema, cancellationToken);
                         await dbSchema.SaveAsync(dbSchemaFile, cancellationToken);
 
-                        progressReport.Finish();
+                        consoleWriter.FinishProgress();
                     }
                     else
                     {
-                        progressReport.Start("Save database schema file");
+                        consoleWriter.StartProgress("Save database schema file");
 
                         await dbSchema.SaveAsync(dbSchemaFile, cancellationToken);
 
-                        progressReport.Finish();
+                        consoleWriter.FinishProgress();
                     }
 
-                    progressReport.Success($"Schema file {dbSchemaFile.Name} successfully generated or updated");
+                    consoleWriter.Success($"Schema file {dbSchemaFile.Name} successfully generated or updated");
                 }
                 catch (Exception ex)
                 {
-                    progressReport.NewLine();
-                    progressReport.Error($"Build failed. {ex.Message}");
+                    consoleWriter.NewLine();
+                    consoleWriter.Error($"Build failed. {ex.Message}");
                     Environment.ExitCode = 1;
                 }
             });
@@ -82,51 +82,51 @@ namespace SqlDocs
         {
             await Execute(async (cancellationToken, cancellationEvent) =>
             {
-                var progressReport = ProgressReportFactory.CreateProgressReport(ProgressUnit.Count);
+                var consoleWriter = ConsoleWriterFactory.CreateConsoleWriter(ProgressUnit.Count);
                 var catalog = new Catalog("SqlDocs", Path.Combine(GetAppFolder(), "./L11n"), new CultureInfo(language));
                 try
                 {
-                    progressReport.Start("Generate database schema");
+                    consoleWriter.StartProgress("Generate database schema");
 
                     var provider = DatabaseProviderFactory.CreateDatabaseProvider(dbEngine, dbConnection);
                     var dbSchema = await DbSchemaFactory.CreateDbSchemaAsync(provider, cancellationToken);
 
-                    progressReport.Finish();
+                    consoleWriter.FinishProgress();
 
                     if (dbSchemaFile.Exists)
                     {
-                        progressReport.Start("Merge and update database schema file");
+                        consoleWriter.StartProgress("Merge and update database schema file");
 
                         dbSchema = await DbSchemaFactory.LoadAndMergeDbSchemaAsync(dbSchemaFile, dbSchema, cancellationToken);
                         await dbSchema.SaveAsync(dbSchemaFile, cancellationToken);
 
-                        progressReport.Finish();
+                        consoleWriter.FinishProgress();
                     }
                     else
                     {
-                        progressReport.Start("Save database schema file");
+                        consoleWriter.StartProgress("Save database schema file");
 
                         await dbSchema.SaveAsync(dbSchemaFile, cancellationToken);
 
-                        progressReport.Finish();
+                        consoleWriter.FinishProgress();
                     }
 
-                    progressReport.Success($"Schema file {dbSchemaFile.Name} successfully generated or updated");
+                    consoleWriter.Success($"Schema file {dbSchemaFile.Name} successfully generated or updated");
 
-                    progressReport.Start("Generate MkDocs project");
+                    consoleWriter.StartProgress("Generate MkDocs project");
 
                     var docsGenerator = DocsGeneratorFactory.CreateMkDocsGenerator(dbEngine, catalog);
 
                     await docsGenerator.GenerateAsync(dbSchema, outputFolder);
 
-                    progressReport.Finish();
-                    progressReport.Success($"MkDocs project successfully generated or updated");
+                    consoleWriter.FinishProgress();
+                    consoleWriter.Success($"MkDocs project successfully generated or updated");
 
                 }
                 catch (Exception ex)
                 {
-                    progressReport.NewLine();
-                    progressReport.Error($"Build failed. {ex.Message}");
+                    consoleWriter.NewLine();
+                    consoleWriter.Error($"Build failed. {ex.Message}");
                     Environment.ExitCode = 1;
                 }
             });
@@ -136,33 +136,33 @@ namespace SqlDocs
         {
             await Execute(async (cancellationToken, cancellationEvent) =>
             {
-                var progressReport = ProgressReportFactory.CreateProgressReport(ProgressUnit.Count);
+                var ConsoleWriter = ConsoleWriterFactory.CreateConsoleWriter(ProgressUnit.Count);
                 var catalog = new Catalog("SqlDocs", Path.Combine(GetAppFolder(), "./L11n"), new CultureInfo(language));
                 try
                 {
-                    progressReport.Start("Load database schema file");
+                    ConsoleWriter.StartProgress("Load database schema file");
 
                     var dbSchema = await DbSchemaFactory.LoadDbSchemaAsync(dbSchemaFile, cancellationToken);
                     await dbSchema.SaveAsync(dbSchemaFile, cancellationToken);
 
-                    progressReport.Finish();
+                    ConsoleWriter.FinishProgress();
 
-                    progressReport.Success($"Schema file {dbSchemaFile.Name} successfully loaded");
+                    ConsoleWriter.Success($"Schema file {dbSchemaFile.Name} successfully loaded");
 
-                    progressReport.Start("Generate MkDocs project");
+                    ConsoleWriter.StartProgress("Generate MkDocs project");
 
                     var docsGenerator = DocsGeneratorFactory.CreateMkDocsGenerator(dbEngine, catalog);
 
                     await docsGenerator.GenerateAsync(dbSchema, outputFolder);
 
-                    progressReport.Finish();
-                    progressReport.Success($"MkDocs project successfully generated or updated");
+                    ConsoleWriter.FinishProgress();
+                    ConsoleWriter.Success($"MkDocs project successfully generated or updated");
 
                 }
                 catch (Exception ex)
                 {
-                    progressReport.NewLine();
-                    progressReport.Error($"Build failed. {ex.Message}");
+                    ConsoleWriter.NewLine();
+                    ConsoleWriter.Error($"Build failed. {ex.Message}");
                     Environment.ExitCode = 1;
                 }
             });

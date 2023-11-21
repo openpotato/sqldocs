@@ -36,13 +36,9 @@ Global
 		{09080314-F527-44FF-8F41-664AFE9D76AF}.Release|x86.ActiveCfg = Release|Any CPU
 		{09080314-F527-44FF-8F41-664AFE9D76AF}.Release|x86.Build.0 = Release|Any CPU
 		{3F276369-D5AB-4935-969A-926AF748FE37}.Debug|Any CPU.ActiveCfg = Debug|x64
-		{3F276369-D5AB-4935-969A-926AF748FE37}.Debug|Any CPU.Build.0 = Debug|x64
 		{3F276369-D5AB-4935-969A-926AF748FE37}.Debug|ARM64.ActiveCfg = Debug|ARM64
-		{3F276369-D5AB-4935-969A-926AF748FE37}.Debug|ARM64.Build.0 = Debug|ARM64
-		{3F276369-D5AB-4935-969A-926AF748FE37}.Debug|x64.ActiveCfg = Debug|x64
-		{3F276369-D5AB-4935-969A-926AF748FE37}.Debug|x64.Build.0 = Debug|x64
+		{3F276369-D5AB-4935-969A-926AF748FE37}.Debug|x64.ActiveCfg = Debug|ARM64
 		{3F276369-D5AB-4935-969A-926AF748FE37}.Debug|x86.ActiveCfg = Debug|x86
-		{3F276369-D5AB-4935-969A-926AF748FE37}.Debug|x86.Build.0 = Debug|x86
 		{3F276369-D5AB-4935-969A-926AF748FE37}.Release|Any CPU.ActiveCfg = Release|x64
 		{3F276369-D5AB-4935-969A-926AF748FE37}.Release|Any CPU.Build.0 = Release|x64
 		{3F276369-D5AB-4935-969A-926AF748FE37}.Release|ARM64.ActiveCfg = Release|ARM64
@@ -56,7 +52,7 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		RESX_NeutralResourcesLanguage = en-GB
 		SolutionGuid = {B146D1D5-6426-4AA3-A11B-144ACD4C0740}
+		RESX_NeutralResourcesLanguage = en-GB
 	EndGlobalSection
 EndGlobal

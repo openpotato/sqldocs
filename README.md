@@ -4,7 +4,7 @@
 
 ## Introduction
 
-SQLDocs is a cross-platform console application build with [.NET 7](https://dotnet.microsoft.com/) to create nice looking [MkDocs](https://www.mkdocs.org/) schema documentations for relational databases. Currently the following database systems are supported:
+SQLDocs is a cross-platform console application build with [.NET 8](https://dotnet.microsoft.com/) to create nice looking [MkDocs](https://www.mkdocs.org/) schema documentations for relational databases. Currently the following database systems are supported:
 
 + [Firebird](https://firebirdsql.org/)
 + [PostgreSQL](https://www.postgresql.org/)

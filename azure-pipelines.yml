@@ -2,28 +2,28 @@ pool:
   vmImage: 'windows-2022'
 
 variables:
+- group: 'code-sign-config'
 - group: 'dotnet-config'
 - group: 'github-config'
 
 steps:
 - checkout: self
   persistCredentials: true
-- task: SSMClientToolsSetup@1
-  displayName: 'Setup DigiCert Tools'
-  inputs:
-    APIKey: '$(SM_API_KEY)'
 - task: DownloadSecureFile@1
   displayName: 'Download Client Authentication Certificate'
   name: SM_CLIENT_CERT_FILE
   inputs:
     secureFile: ClientCert.p12
+- task: SSMClientToolsSetup@1
+  displayName: 'Setup DigiCert Tools'
+  inputs:
+    APIKey: '$(SM_API_KEY)'
 - task: PowerShell@2
-  displayName: 'Prepare Code Signing'
+  displayName: 'Prepare DigiCert Code Signing'
   inputs:
     targetType: 'inline'
     script: |
-      $env:PATH += ';C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64;C:\Program Files\DigiCert\DigiCert Keylocker Tools'
-      $env:SM_LOG_OUTPUT = 'console'
+      $env:PATH += ';C:\Program Files\DigiCert\DigiCert Keylocker Tools'
       smctl credentials save $(SM_API_KEY) $(SM_CLIENT_CERT_PASSWORD)
       smksp_cert_sync.exe
     failOnStderr: true
@@ -83,13 +83,12 @@ steps:
     modifyOutputPath: false
 - task: PowerShell@2
   displayName: 'Sign EXE files'
+  env:
+    SM_CLIENT_CERT_FILE : $(SM_CLIENT_CERT_FILE.secureFilePath)
   inputs:
     targetType: 'inline'
     script: |
-      $env:PATH += ';C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64;C:\Program Files\DigiCert\DigiCert Keylocker Tools'
-      $env:SM_HOST = '$(SM_HOST)'
-      $env:SM_CLIENT_CERT_FILE = '$(SM_CLIENT_CERT_FILE.secureFilePath)'
-      $env:SM_LOG_OUTPUT = 'console'
+      $env:PATH += ';C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64'
       signtool.exe sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /sha1 $(SM_CERT_FINGERPRINT) $(Build.SourcesDirectory)/src/bin/Publish/win-x64/SqlDocs.exe
       signtool.exe sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /sha1 $(SM_CERT_FINGERPRINT) $(Build.SourcesDirectory)/src/bin/Publish/win-x86/SqlDocs.exe
       signtool.exe sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /sha1 $(SM_CERT_FINGERPRINT) $(Build.SourcesDirectory)/src/bin/Publish/portable/SqlDocs.exe
@@ -117,15 +116,14 @@ steps:
     replaceExistingArchive: true
 - task: PowerShell@2
   displayName: 'Sign MSI files'
+  env:
+    SM_CLIENT_CERT_FILE : $(SM_CLIENT_CERT_FILE.secureFilePath)
   inputs:
     targetType: 'inline'
     script: |
-      $env:PATH += ';C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64;C:\Program Files\DigiCert\DigiCert Keylocker Tools'
-      $env:SM_HOST = '$(SM_HOST)'
-      $env:SM_CLIENT_CERT_FILE = '$(SM_CLIENT_CERT_FILE.secureFilePath)'
-      $env:SM_LOG_OUTPUT = 'console'
-      signtool.exe sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /sha1 $(SM_CERT_FINGERPRINT) $(Build.ArtifactStagingDirectory)/sqldocs-x64.msi
-      signtool.exe sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /sha1 $(SM_CERT_FINGERPRINT) $(Build.ArtifactStagingDirectory)/sqldocs-x86.msi
+      $env:PATH += ';C:\Program Files (x86)\Windows Kits\10\bin\10.0.22621.0\x64'
+      signtool.exe sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /sha1 $(SM_CERT_FINGERPRINT) /d "SQLDocs" $(Build.ArtifactStagingDirectory)/sqldocs-x64.msi
+      signtool.exe sign /tr http://timestamp.digicert.com /td SHA256 /fd SHA256 /sha1 $(SM_CERT_FINGERPRINT) /d "SQLDocs" $(Build.ArtifactStagingDirectory)/sqldocs-x86.msi
     failOnStderr: true
     pwsh: true
 - task: PowerShell@2

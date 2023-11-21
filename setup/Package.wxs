@@ -39,7 +39,6 @@
     <!-- Properties for add/remove programs -->
     <Property Id="ARPPRODUCTICON" Value="AppIcon.exe" />
     <Property Id="ARPHELPLINK" Value="$(var.AppHelpLink)" />
-    <Property Id="ARPNOREPAIR" Value="yes" Secure="yes" />
     
     <!-- Default installation folder -->
     <Property Id="WIXUI_INSTALLDIR" Value="INSTALLDIR" />
@@ -72,7 +71,7 @@
       Platform="$(var.Platform)"
       RollForward="major"
       RuntimeType="core"
-      Version="7.0.0"/>
+      Version="8.0.0"/>
 
     <!-- Embed cab files into msi -->
     <MediaTemplate EmbedCab="yes"/>
