@@ -4,7 +4,7 @@
     <AssemblyName>SqlDocs</AssemblyName>
     <OutputType>Exe</OutputType>
     <ApplicationIcon>Program.ico</ApplicationIcon>
-    <TargetFramework>net7.0</TargetFramework>
+    <TargetFramework>net8.0</TargetFramework>
     <Authors>STÜBER SYSTEMS GmbH</Authors>
     <Company>STÜBER SYSTEMS GmbH</Company>
     <Copyright>© 2023 STÜBER SYSTEMS GmbH</Copyright>
@@ -14,11 +14,11 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Enbrea.MdBuilder" Version="0.0.2" />
-    <PackageReference Include="Enbrea.Progress" Version="0.0.4" />
-    <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="9.1.1" />
+    <PackageReference Include="Enbrea.Konsoli" Version="0.0.2" />
+    <PackageReference Include="Enbrea.MdBuilder" Version="0.0.3" />
+    <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="10.0.0" />
     <PackageReference Include="NGettext" Version="0.6.7" />
-    <PackageReference Include="Npgsql" Version="7.0.4" />
+    <PackageReference Include="Npgsql" Version="8.0.0" />
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
   </ItemGroup>
 

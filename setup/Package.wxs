@@ -71,7 +71,7 @@
       Platform="$(var.Platform)"
       RollForward="major"
       RuntimeType="core"
-      Version="7.0.0"/>
+      Version="8.0.0"/>
 
     <!-- Embed cab files into msi -->
     <MediaTemplate EmbedCab="yes"/>
