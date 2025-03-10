@@ -16,10 +16,12 @@ steps:
     secureFile: ClientCert.p12
 - task: SSMClientToolsSetup@1
   displayName: 'Setup DigiCert Tools'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   inputs:
     APIKey: '$(SM_API_KEY)'
 - task: PowerShell@2
   displayName: 'Prepare DigiCert Code Signing'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   inputs:
     targetType: 'inline'
     script: |
@@ -34,7 +36,7 @@ steps:
     filePath: 'azure-gitversion.ps1'
     failOnStderr: true
     pwsh: true
-- task: Assembly-Info-NetCore@2
+- task: Assembly-Info-NetCore@3
   displayName: 'Apply Assembly Infos'
   inputs:
     Path: '$(Build.SourcesDirectory)'
@@ -83,8 +85,10 @@ steps:
     modifyOutputPath: false
 - task: PowerShell@2
   displayName: 'Sign EXE files'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   env:
     SM_CLIENT_CERT_FILE : $(SM_CLIENT_CERT_FILE.secureFilePath)
+    SM_HOST : $(SM_HOST)
   inputs:
     targetType: 'inline'
     script: |
@@ -116,8 +120,10 @@ steps:
     replaceExistingArchive: true
 - task: PowerShell@2
   displayName: 'Sign MSI files'
+  condition: and(succeeded(), eq(variables['Build.SourceBranch'], 'refs/heads/main'))
   env:
     SM_CLIENT_CERT_FILE : $(SM_CLIENT_CERT_FILE.secureFilePath)
+    SM_HOST : $(SM_HOST)
   inputs:
     targetType: 'inline'
     script: |
