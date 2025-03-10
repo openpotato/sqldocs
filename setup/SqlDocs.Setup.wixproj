@@ -1,4 +1,4 @@
-﻿<Project Sdk="WixToolset.Sdk/4.0.0">
+﻿<Project Sdk="WixToolset.Sdk/5.0.0">
   <PropertyGroup>
     <OutputName>sqldocs-$(Platform)</OutputName>
     <OutputType>Package</OutputType>
@@ -19,7 +19,7 @@
     <Cultures>;</Cultures>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="WixToolset.Netfx.wixext" Version="4.0.3" />
-    <PackageReference Include="WixToolset.UI.wixext" Version="4.0.3" />
+    <PackageReference Include="WixToolset.Netfx.wixext" Version="5.0.2" />
+    <PackageReference Include="WixToolset.UI.wixext" Version="5.0.2" />
   </ItemGroup>
 </Project>
