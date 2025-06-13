@@ -51,7 +51,7 @@
 
     <!-- Determine the directory of a previous installation (if one exists). If not INSTALLDIR stays empty -->
     <Property Id="INSTALLDIR">
-      <RegistrySearch Id="DetermineInstallLocation" Type="raw" Root="HKLM" Key="Software\!(loc.Manufacturer)\!(loc.AppName)" Name="InstallLocation" />
+      <RegistrySearch Id="DetermineInstallLocation" Type="raw" Root="HKLM" Key="Software\!(loc.ManufacturerFolder)\!(loc.AppName)" Name="InstallLocation" />
     </Property>
 
     <!-- Set ARPINSTALLLOCATION property (see https://learn.microsoft.com/en-us/windows/win32/msi/arpinstalllocation) -->
@@ -92,7 +92,7 @@
 
     <!-- Directory and file structure -->
     <StandardDirectory Id="ProgramFiles6432Folder">
-      <Directory Id="ProjectFolder" Name="!(loc.ManufactorFolder)">
+      <Directory Id="ProjectFolder" Name="!(loc.ManufacturerFolder)">
         <Directory Id="INSTALLDIR" Name="!(loc.AppFolder)">
 
           <!-- EXE file -->
