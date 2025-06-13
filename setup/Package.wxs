@@ -65,13 +65,13 @@
 
     </InstallExecuteSequence>
 
-    <!-- Compatibility check for .NET 7 -->
+    <!-- Compatibility check for .NET 9 -->
     <netfx:DotNetCompatibilityCheck
       Property="DOTNETRUNTIMECHECK"
       Platform="$(var.Platform)"
       RollForward="major"
       RuntimeType="core"
-      Version="8.0.0"/>
+      Version="9.0.0"/>
 
     <!-- Embed cab files into msi -->
     <MediaTemplate EmbedCab="yes"/>
@@ -92,7 +92,7 @@
 
     <!-- Directory and file structure -->
     <StandardDirectory Id="ProgramFiles6432Folder">
-      <Directory Id="ProjectFolder" Name="!(loc.ProjectFolder)">
+      <Directory Id="ProjectFolder" Name="!(loc.ManufactorFolder)">
         <Directory Id="INSTALLDIR" Name="!(loc.AppFolder)">
 
           <!-- EXE file -->
@@ -122,7 +122,7 @@
 
           <!-- Registry entries -->
           <Component Id="Registry.InstallLocation" Guid="424374e7-3d05-4289-b1bb-67c92fc3c20f">
-            <RegistryKey Root="HKLM" Key="Software\!(loc.Manufacturer)\!(loc.AppName)">
+            <RegistryKey Root="HKLM" Key="Software\!(loc.ManufacturerFolder)\!(loc.AppName)">
               <RegistryValue
                 Name="InstallLocation"
                 Value="[INSTALLDIR]"
