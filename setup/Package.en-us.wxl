@@ -7,7 +7,7 @@ This file contains the declaration of all the localizable strings.
   <String Id="AppDescription" Value="Building nice looking documention of relational database schemata" />
   <String Id="AppFolder" Value="SqlDocs" />
   <String Id="Manufacturer" Value="STÜBER SYSTEMS GmbH" />
-  <String Id="ProjectFolder" Value="OpenPotato" />
+  <String Id="ManufacturerFolder" Value="OpenPotato" />
   <String Id="DowngradeError" Value="A newer version of [ProductName] is already installed." />
 
   <String Id="FeaturesCompleteTitle" Value="Complete installation" />

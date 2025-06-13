@@ -15,8 +15,8 @@
 
   <ItemGroup>
     <PackageReference Include="Enbrea.Konsoli" Version="0.1.1" />
-    <PackageReference Include="Enbrea.MdBuilder" Version="0.0.3" />
-    <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="10.3.2" />
+    <PackageReference Include="Enbrea.MdBuilder" Version="0.0.4" />
+    <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="10.3.3" />
     <PackageReference Include="NGettext" Version="0.6.7" />
     <PackageReference Include="Npgsql" Version="9.0.3" />
     <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
