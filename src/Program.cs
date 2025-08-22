@@ -1,8 +1,8 @@
-﻿#region SqlDocs - Copyright (C) 2023 STÜBER SYSTEMS GmbH
+﻿#region SqlDocs - Copyright (C) STÜBER SYSTEMS GmbH
 /*    
  *    SqlDocs
  *    
- *    Copyright (C) 2023 STÜBER SYSTEMS GmbH
+ *    Copyright (C) STÜBER SYSTEMS GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU Affero General Public License, version 3,
@@ -26,7 +26,7 @@ namespace SqlDocs;
 
 class Program
 {
-    public static async Task Main(string[] args)
+    public static async Task<int> Main(string[] args)
     {
         // Build up command line api
         var rootCommand = new RootCommand(description: "Building nice looking documentions of relational database schemata")
@@ -37,6 +37,7 @@ class Program
         };
 
         // Parse the incoming args and invoke the handler
-        await rootCommand.InvokeAsync(args);
+        var parseResult = rootCommand.Parse(args);
+        return await parseResult.InvokeAsync();
     }
 }

@@ -1,8 +1,8 @@
-﻿#region SqlDocs - Copyright (C) 2023 STÜBER SYSTEMS GmbH
+﻿#region SqlDocs - Copyright (C) STÜBER SYSTEMS GmbH
 /*    
  *    SqlDocs
  *    
- *    Copyright (C) 2023 STÜBER SYSTEMS GmbH
+ *    Copyright (C) STÜBER SYSTEMS GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU Affero General Public License, version 3,
@@ -31,24 +31,28 @@ namespace SqlDocs
         {
             var command = new Command("build-json", "Builds a JSON file with a database schema")
             {
-                new Option<DatabaseEngine>(new[] { "--dbengine", "-db" }, "Name of a supported database engine")
+                new Option<DatabaseEngine>("--dbengine", "-db")
                 {
-                    IsRequired = true
+                    Description = "Name of a supported database engine",
+                    Required = true
                 },
-                new Option<string>(new[] { "--dbconnection", "-c" }, "ADO.NET database connection string")
+                new Option<string>("--dbconnection", "-c")
                 {
-                    IsRequired = true
+                    Description = "ADO.NET database connection string",
+                    Required = true
                 },
-                new Option<FileInfo>(new[] { "--dbschemafile", "-s" }, "Path to database schema JSON file")
+                new Option<FileInfo>("--dbschemafile", "-s")
                 {
-                    IsRequired = true
+                    Description = "Path to database schema JSON file",
+                    Required = true
                 }
             };
 
-            command.SetHandler(CommandHandlers.BuildJson, 
-                command.Options[0] as Option<DatabaseEngine>,
-                command.Options[1] as Option<string>,
-                command.Options[2] as Option<FileInfo>);
+            command.SetAction(parseResult => CommandHandlers.BuildJson(
+                parseResult.GetValue(command.Options[0] as Option<DatabaseEngine>),
+                parseResult.GetValue(command.Options[1] as Option<string>),
+                parseResult.GetValue(command.Options[2] as Option<FileInfo>))
+            );
 
             return command;
         }
@@ -57,34 +61,40 @@ namespace SqlDocs
         {
             var command = new Command("build-json-mkdocs", "Builds a JSON file with a database schema and generates or updates a MkDocs project out of it")
             {
-                new Option<DatabaseEngine>(new[] { "--dbengine", "-db" }, "Name of a supported database engine")
+                new Option<DatabaseEngine>("--dbengine", "-db")
                 {
-                    IsRequired = true
+                    Description = "Name of a supported database engine",
+                    Required = true
                 },
-                new Option<string>(new[] { "--dbconnection", "-c" }, "ADO.NET database connection string")
+                new Option<string>("--dbconnection", "-c")
                 {
-                    IsRequired = true
+                    Description = "ADO.NET database connection string",
+                    Required = true
                 },
-                new Option<FileInfo>(new[] { "--dbschemafile", "-s" }, "Path to database schema JSON file")
+                new Option<FileInfo>("--dbschemafile", "-s")
                 {
-                    IsRequired = true
+                    Description = "Path to database schema JSON file",
+                    Required = true
                 },
-                new Option<DirectoryInfo>(new[] { "--outputfolder", "-o" }, "Path to MkDocs project folder")
+                new Option<DirectoryInfo>("--outputfolder", "-o")
                 {
-                    IsRequired = true
+                    Description = "Path to MkDocs project folder",
+                    Required = true
                 },
-                new Option<string>(new[] { "--language", "-l" }, "Supported language code")
+                new Option<string>("--language", "-l")
                 {
-                    IsRequired = true
+                    Description = "Supported language code",
+                    Required = true
                 }
             };
 
-            command.SetHandler(CommandHandlers.BuildJsonAndMkDocs,
-                command.Options[0] as Option<DatabaseEngine>,
-                command.Options[1] as Option<string>,
-                command.Options[2] as Option<FileInfo>,
-                command.Options[3] as Option<DirectoryInfo>,
-                command.Options[4] as Option<string>);
+            command.SetAction(parseResult => CommandHandlers.BuildJsonAndMkDocs(
+                parseResult.GetValue(command.Options[0] as Option<DatabaseEngine>),
+                parseResult.GetValue(command.Options[1] as Option<string>),
+                parseResult.GetValue(command.Options[2] as Option<FileInfo>),
+                parseResult.GetValue(command.Options[3] as Option<DirectoryInfo>),
+                parseResult.GetValue(command.Options[4] as Option<string>))
+            );
 
             return command;
         }
@@ -93,29 +103,34 @@ namespace SqlDocs
         {
             var command = new Command("build-mkdocs", "Loads a JSON file with a database schema and generates or updates a MkDocs project out of it")
             {
-                new Option<DatabaseEngine>(new[] { "--dbengine", "-db" }, "Name of a supported database engine")
+                new Option<DatabaseEngine>("--dbengine", "-db")
                 {
-                    IsRequired = true
+                    Description = "Name of a supported database engine",
+                    Required = true
                 },
-                new Option<FileInfo>(new[] { "--dbschemafile", "-s" }, "Path to database schema JSON file")
+                new Option<FileInfo>("--dbschemafile", "-s")
                 {
-                    IsRequired = true
+                    Description = "Path to database schema JSON file",
+                    Required = true
                 },
-                new Option<DirectoryInfo>(new[] { "--outputfolder", "-o" }, "Path to MkDocs project folder")
+                new Option<DirectoryInfo>("--outputfolder", "-o")
                 {
-                    IsRequired = true
+                    Description = "Path to MkDocs project folder",
+                    Required = true
                 },
-                new Option<string>(new[] { "--language", "-l" }, "Supported language code")
+                new Option<string>("--language", "-l")
                 {
-                    IsRequired = true
+                    Description = "Supported language code",
+                    Required = true
                 }
             };
 
-            command.SetHandler(CommandHandlers.BuildMkDocs,
-                command.Options[0] as Option<DatabaseEngine>,
-                command.Options[1] as Option<FileInfo>,
-                command.Options[2] as Option<DirectoryInfo>,
-                command.Options[3] as Option<string>);
+            command.SetAction(parseResult => CommandHandlers.BuildMkDocs(
+                parseResult.GetValue(command.Options[0] as Option<DatabaseEngine>),
+                parseResult.GetValue(command.Options[1] as Option<FileInfo>),
+                parseResult.GetValue(command.Options[2] as Option<DirectoryInfo>),
+                parseResult.GetValue(command.Options[3] as Option<string>))
+            );
 
             return command;
         }

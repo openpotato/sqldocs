@@ -1,8 +1,8 @@
-﻿#region SqlDocs - Copyright (C) 2023 STÜBER SYSTEMS GmbH
+﻿#region SqlDocs - Copyright (C) STÜBER SYSTEMS GmbH
 /*    
  *    SqlDocs
  *    
- *    Copyright (C) 2023 STÜBER SYSTEMS GmbH
+ *    Copyright (C) STÜBER SYSTEMS GmbH
  *
  *    This program is free software: you can redistribute it and/or modify
  *    it under the terms of the GNU Affero General Public License, version 3,
