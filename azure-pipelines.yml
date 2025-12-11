@@ -74,11 +74,12 @@ stages:
         InformationalVersion: '$(SemVersion)'
         LogLevel: 'verbose'
         FailOnWarning: false
+        DisableTelemetry: true
     - task: DotNetCoreCLI@2
       displayName: 'Restore'
       inputs:
         command: 'restore'
-        projects: '*.sln'
+        projects: '*.slnx'
         feedsToUse: 'select'
         vstsFeed: '340e7a34-33ea-4418-8b72-d55dcb74efa7/dd1a6c3c-4e29-44c2-a80d-9d6c7004ac57'
     - task: DotNetCoreCLI@2

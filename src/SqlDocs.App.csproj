@@ -4,7 +4,7 @@
     <AssemblyName>SqlDocs</AssemblyName>
     <OutputType>Exe</OutputType>
     <ApplicationIcon>Program.ico</ApplicationIcon>
-    <TargetFramework>net9.0</TargetFramework>
+    <TargetFramework>net10.0</TargetFramework>
     <Authors>STÜBER SYSTEMS GmbH</Authors>
     <Company>STÜBER SYSTEMS GmbH</Company>
     <Copyright>© 2025 STÜBER SYSTEMS GmbH</Copyright>
@@ -16,10 +16,10 @@
   <ItemGroup>
     <PackageReference Include="Enbrea.Konsoli" Version="0.1.1" />
     <PackageReference Include="Enbrea.MdBuilder" Version="0.0.4" />
-    <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="10.3.3" />
+    <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="10.3.4" />
     <PackageReference Include="NGettext" Version="0.6.7" />
-    <PackageReference Include="Npgsql" Version="9.0.3" />
-    <PackageReference Include="System.CommandLine" Version="2.0.0-beta7.25380.108" />
+    <PackageReference Include="Npgsql" Version="10.0.0" />
+    <PackageReference Include="System.CommandLine" Version="2.0.0" />
   </ItemGroup>
 
   <ItemGroup>
@@ -35,7 +35,7 @@
 
   <ItemGroup>
     <None Update="L11n\de\LC_MESSAGES\SqlDocs.mo">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
 

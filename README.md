@@ -1,10 +1,14 @@
-![GitHub](https://img.shields.io/github/license/openpotato/sqldocs)
-
+<div align="center">
+  
 # SQLDocs
 
-## Introduction
+[![.Net](https://img.shields.io/badge/.NET-5C2D91?style=for-the-badge&logo=.net&logoColor=white)](https://dotnet.microsoft.com/)
+[![GitHub License](https://img.shields.io/github/license/openpotato/sqldocs?style=for-the-badge)](./LICENSE)
+[![Documentation](https://img.shields.io/badge/docs-available-brightgreen?style=for-the-badge)](https://github.com/openpotato/sqldocs/wiki)
 
-SQLDocs is a cross-platform console application build with [.NET 9](https://dotnet.microsoft.com/) to create nice looking [MkDocs](https://www.mkdocs.org/) schema documentations for relational databases. Currently the following database systems are supported:
+</div>
+
+SQLDocs is a cross-platform console application build with [.NET 10](https://dotnet.microsoft.com/) to create nice looking [MkDocs](https://www.mkdocs.org/) schema documentations for relational databases. Currently the following database systems are supported:
 
 + [Firebird](https://firebirdsql.org/)
 + [PostgreSQL](https://www.postgresql.org/)
