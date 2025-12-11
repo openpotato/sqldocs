@@ -14,12 +14,12 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Enbrea.Konsoli" Version="0.1.1" />
+    <PackageReference Include="Enbrea.Konsoli" Version="0.2.0" />
     <PackageReference Include="Enbrea.MdBuilder" Version="0.0.4" />
     <PackageReference Include="FirebirdSql.Data.FirebirdClient" Version="10.3.4" />
     <PackageReference Include="NGettext" Version="0.6.7" />
     <PackageReference Include="Npgsql" Version="10.0.0" />
-    <PackageReference Include="System.CommandLine" Version="2.0.0" />
+    <PackageReference Include="System.CommandLine" Version="2.0.1" />
   </ItemGroup>
 
   <ItemGroup>
